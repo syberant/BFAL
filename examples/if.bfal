@@ -1,0 +1,11 @@
+var message 'Z';
+var a;
+read a;
+sub a 'A';
+
+if a {
+  put message;
+};
+
+var newline 10;
+put newline;

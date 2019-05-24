@@ -52,6 +52,7 @@ stmt =  stmtVar
     <|> stmtPut
     <|> stmtRead
     <|> stmtCopy
+    <|> stmtIf
     <|> stmtWhile
     <|> stmtIncr
     <|> stmtDecr
@@ -99,6 +100,15 @@ stmtCopy =
      many1 space
      to <- ident
      return SCopy { _from = from, _to = to }
+
+stmtIf :: Parser Char Maybe Stmt
+stmtIf =
+  do token "if"
+     many1 space
+     name <- ident
+     many space
+     body <- block
+     return SIf { _name = name, _body = body}
 
 stmtWhile :: Parser Char Maybe Stmt
 stmtWhile =

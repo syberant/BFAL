@@ -120,6 +120,12 @@ compile SCopy { _from = from, _to = to } c
          |> over output (++ [BFJumpBack])
          $  c
          )
+-- Execute body if name is not zero
+compile SIf { _name = name, _body = body} c
+  = compile SWhile { _name = name,
+      _body = body ++ [SClear { _name = name}]
+    } c
+-- Execute body while name is not zero
 compile SWhile { _name = name, _body = body } c
   =   compilerGoToSymbol name c
   >>= return . over output (++ [BFJumpForward])

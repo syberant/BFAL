@@ -14,6 +14,7 @@ module Syntax.AST
 --   SPut    ::= "put" Ident
 --   SRead   ::= "read" Ident
 --   SCopy   ::= "copy" Ident Ident
+--   SIf     ::= "if" Ident Block
 --   SWhile  ::= "while" Ident Block
 --   SIncr   ::= "incr" Ident
 --   SDecr   ::= "decr" Ident
@@ -44,6 +45,10 @@ data Stmt
   | SCopy
     { _from :: Ident
     , _to   :: Ident
+    }
+  | SIf
+    { _name :: Ident
+    , _body :: [Stmt]
     }
   | SWhile
     { _name :: Ident
